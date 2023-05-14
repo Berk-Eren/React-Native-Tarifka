@@ -6,8 +6,6 @@ function useFetch(method, url) {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log('Hl');
-
   useEffect(() => {
     axios({
       method,
@@ -24,8 +22,6 @@ function useFetch(method, url) {
         setIsLoading(false);
       });
   }, []);
-
-  /**/
 
   return [isLoading, data, error];
 }
