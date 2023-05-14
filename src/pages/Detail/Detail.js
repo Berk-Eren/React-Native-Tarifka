@@ -1,6 +1,7 @@
 import {
   SafeAreaView,
   View,
+  Linking,
   Text,
   Image,
   ScrollView,
@@ -16,7 +17,7 @@ const Details = ({route}) => {
     'GET',
     `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${route.params.mealId}`,
   );
-
+  console.log(data);
   return (
     <SafeAreaView style={styles.container}>
       {data.meals && (
@@ -37,7 +38,9 @@ const Details = ({route}) => {
           <Text style={[styles.details, styles.textMargin]}>
             {data.meals[0].strInstructions}
           </Text>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => Linking.openURL(data.meals[0].strSource)}>
             <Text style={styles.buttonText}>Watch Youtube</Text>
           </TouchableOpacity>
         </ScrollView>
