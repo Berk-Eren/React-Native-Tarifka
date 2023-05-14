@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 0.25,
+    alignSelf: 'center',
     height: '100%',
     resizeMode: 'contain',
     borderRadius: 50,

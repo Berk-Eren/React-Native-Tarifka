@@ -8,8 +8,7 @@ const Categories = ({navigation}) => {
     'GET',
     'https://www.themealdb.com/api/json/v1/1/categories.php',
   );
-  const meals = ['beef', 'steak', 'a', 'b', ...'helfdsdfsdfsdfadsfadffsdlo'];
-  console.log(data);
+
   return (
     <SafeAreaView style={styles.container}>
       {data.categories && (
@@ -20,7 +19,9 @@ const Categories = ({navigation}) => {
                 title={item.strCategory}
                 key={item.idCategory}
                 onPress={() => {
-                  navigation.push('Meals', {title: item.strCategory});
+                  navigation.push('Meals', {
+                    title: item.strCategory,
+                  });
                 }}
                 img_url={item.strCategoryThumb}
               />

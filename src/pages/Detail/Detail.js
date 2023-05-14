@@ -1,26 +1,47 @@
-import {SafeAreaView, View, Text, Image, ScrollView} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 
 import styles from './Detail.styles';
 
-const Stack = createNativeStackNavigator();
+import useFetch from '../../hooks/useFetch';
 
 const Details = ({route}) => {
+  const [isLoading, data, error] = useFetch(
+    'GET',
+    `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${route.params.mealId}`,
+  );
+
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <Image
-          style={styles.image}
-          source={{
-            uri: 'https://cdn.yemek.com/mncrop/940/625/uploads/2014/08/kasibeyaz-bosphorus-subat-2020.jpg',
-          }}
-        />
-        <Text style={styles.title}>{route.params?.title}</Text>
-        <Text style={styles.subtitle}>Subtitle</Text>
-        <View style={styles.line}></View>
-        <Text style={styles.details}>Details</Text>
-      </ScrollView>
+      {data.meals && (
+        <ScrollView>
+          <Image
+            style={styles.image}
+            source={{
+              uri: data.meals[0].strMealThumb,
+            }}
+          />
+          <Text style={[styles.title, styles.textMargin]}>
+            {data.meals[0].strMeal}
+          </Text>
+          <Text style={[styles.subtitle, styles.textMargin]}>
+            {data.meals[0].strArea}
+          </Text>
+          <View style={[styles.line, styles.textMargin]}></View>
+          <Text style={[styles.details, styles.textMargin]}>
+            {data.meals[0].strInstructions}
+          </Text>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>Watch Youtube</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      )}
     </SafeAreaView>
   );
 };

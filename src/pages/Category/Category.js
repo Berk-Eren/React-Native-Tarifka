@@ -9,22 +9,34 @@ import MealCard from '../../components/MealCard';
 
 import styles from './Category.styles';
 
+import useFetch from '../../hooks/useFetch';
+
 const Meals = ({navigation, route}) => {
-  const meals = ['beef', 'beef', 'beef', 'beef'];
+  const [isLoading, data, error] = useFetch(
+    'GET',
+    `https://www.themealdb.com/api/json/v1/1/filter.php?c=${route.params.title}`,
+  );
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
-        {meals.map((item, index) => (
-          <TouchableWithoutFeedback
-            key={index}
-            onPress={() => navigation.navigate('Details', {title: 'Hello'})}>
-            <View>
-              <MealCard />
-            </View>
-          </TouchableWithoutFeedback>
-        ))}
-      </ScrollView>
+      {data.meals && (
+        <ScrollView style={styles.scrollView}>
+          {data.meals.map(item => (
+            <TouchableWithoutFeedback
+              key={item.idMeal}
+              onPress={() =>
+                navigation.navigate('Details', {
+                  title: item.strMeal,
+                  mealId: item.idMeal,
+                })
+              }>
+              <View>
+                <MealCard mealName={item.strMeal} mealUri={item.strMealThumb} />
+              </View>
+            </TouchableWithoutFeedback>
+          ))}
+        </ScrollView>
+      )}
     </SafeAreaView>
   );
 };

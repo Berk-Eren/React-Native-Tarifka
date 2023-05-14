@@ -1,15 +1,15 @@
 import {View, ImageBackground, Text} from 'react-native';
 import styles from './MealCard.styles';
 
-const MealCard = function () {
+const MealCard = function (props) {
   return (
     <View style={styles.container}>
       <ImageBackground
         style={styles.imageBackground}
         source={{
-          uri: 'https://www.makbul.com/Content/global/images/products/2/244/ORG-gullu-lokum-kg394.jpg',
+          uri: props.mealUri,
         }}>
-        <Text style={styles.text}>Hello</Text>
+        <Text style={styles.text}>{props.mealName}</Text>
       </ImageBackground>
     </View>
   );

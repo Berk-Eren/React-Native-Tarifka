@@ -1,3 +1,4 @@
+import {Dimensions} from 'react-native';
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
@@ -6,17 +7,20 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   image: {
-    flex: 0.25,
+    height: Dimensions.get('window').height * 0.4,
+  },
+  textMargin: {
+    margin: 5,
   },
   title: {
     color: '#682424',
     fontWeight: '900',
-    fontSize: 50,
+    fontSize: 32,
   },
   subtitle: {
     color: '#682424',
     fontWeight: '900',
-    fontSize: 30,
+    fontSize: 25,
   },
   line: {
     borderColor: '#ac7d7d',
@@ -26,6 +30,18 @@ const styles = StyleSheet.create({
   details: {
     fontSize: 18,
     color: 'black',
+  },
+  button: {
+    margin: 10,
+    padding: 5,
+    backgroundColor: 'red',
+    borderRadius: 10,
+  },
+  buttonText: {
+    alignSelf: 'center',
+    fontSize: 35,
+    color: 'white',
+    fontWeight: 'bold',
   },
 });
 
