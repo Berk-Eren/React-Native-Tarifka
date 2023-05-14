@@ -1,26 +1,33 @@
-import {View, Text, Button, ScrollView, SafeAreaView} from 'react-native';
+import {ScrollView, SafeAreaView} from 'react-native';
 import Card from '../../components/CategoryCard';
 import styles from './CategoryList.style';
+import useFetch from '../../hooks/useFetch';
 
 const Categories = ({navigation}) => {
+  const [isLoading, data, error] = useFetch(
+    'GET',
+    'https://www.themealdb.com/api/json/v1/1/categories.php',
+  );
   const meals = ['beef', 'steak', 'a', 'b', ...'helfdsdfsdfsdfadsfadffsdlo'];
-
+  console.log(data);
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
-        {meals.map((item, index) => {
-          return (
-            <Card
-              title={item}
-              key={index}
-              onPress={() => {
-                navigation.push('Meals', {title: item});
-              }}
-              img_url="https://w7.pngwing.com/pngs/607/104/png-transparent-googleplex-google-logo-google-search-oliver-atom-text-logo-business.png"
-            />
-          );
-        })}
-      </ScrollView>
+      {data.categories && (
+        <ScrollView>
+          {data.categories.map((item, index) => {
+            return (
+              <Card
+                title={item.strCategory}
+                key={item.idCategory}
+                onPress={() => {
+                  navigation.push('Meals', {title: item.strCategory});
+                }}
+                img_url={item.strCategoryThumb}
+              />
+            );
+          })}
+        </ScrollView>
+      )}
     </SafeAreaView>
   );
 };

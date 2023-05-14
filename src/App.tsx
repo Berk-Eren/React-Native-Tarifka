@@ -8,12 +8,15 @@
 
 import React, {useEffect} from 'react';
 import {StatusBar} from 'react-native'
+
 import Categories from './pages/CategoryList'
 import Details from './pages/Detail'
 import Category from './pages/Category'
 
 import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import capitalizeText from "./utils"
 
 const Stack = createNativeStackNavigator();
 
@@ -36,7 +39,7 @@ function App() {
       >
       <Stack.Screen name="Categories" component={Categories} />
       <Stack.Screen name="Details" component={Details} />
-      <Stack.Screen name="Meals" component={Category} options={({route})=>({title: route.params.title + "fdsf"})} />
+      <Stack.Screen name="Meals" component={Category} options={({route})=>({title: capitalizeText(route.params.title)}) } />
     </Stack.Navigator>
   </NavigationContainer>)
 }

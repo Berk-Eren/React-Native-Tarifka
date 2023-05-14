@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     color: 'white',
     paddingRight: 10,
     fontWeight: '700',
-    fontSize: 50,
+    fontSize: 45,
     textTransform: 'capitalize',
   },
 });
