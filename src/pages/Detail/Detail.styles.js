@@ -33,13 +33,13 @@ const styles = StyleSheet.create({
   },
   button: {
     margin: 10,
-    padding: 5,
+    padding: 10,
     backgroundColor: 'red',
     borderRadius: 10,
   },
   buttonText: {
     alignSelf: 'center',
-    fontSize: 35,
+    fontSize: 20,
     color: 'white',
     fontWeight: 'bold',
   },

@@ -40,7 +40,7 @@ const Details = ({route}) => {
           </Text>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => Linking.openURL(data.meals[0].strSource)}>
+            onPress={() => Linking.openURL(data.meals[0].strYoutube)}>
             <Text style={styles.buttonText}>Watch Youtube</Text>
           </TouchableOpacity>
         </ScrollView>
