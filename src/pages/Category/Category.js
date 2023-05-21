@@ -6,6 +6,7 @@ import {
   ScrollView,
 } from 'react-native';
 import MealCard from '../../components/MealCard';
+import LoadingWrapper from '../../components/LoadingWrapper';
 
 import styles from './Category.styles';
 
@@ -19,24 +20,29 @@ const Meals = ({navigation, route}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {data.meals && (
-        <ScrollView style={styles.scrollView}>
-          {data.meals.map(item => (
-            <TouchableWithoutFeedback
-              key={item.idMeal}
-              onPress={() =>
-                navigation.navigate('Details', {
-                  title: item.strMeal,
-                  mealId: item.idMeal,
-                })
-              }>
-              <View>
-                <MealCard mealName={item.strMeal} mealUri={item.strMealThumb} />
-              </View>
-            </TouchableWithoutFeedback>
-          ))}
-        </ScrollView>
-      )}
+      <LoadingWrapper isLoading={isLoading} error={error}>
+        {data.meals && (
+          <ScrollView style={styles.scrollView}>
+            {data.meals.map(item => (
+              <TouchableWithoutFeedback
+                key={item.idMeal}
+                onPress={() =>
+                  navigation.navigate('Details', {
+                    title: item.strMeal,
+                    mealId: item.idMeal,
+                  })
+                }>
+                <View>
+                  <MealCard
+                    mealName={item.strMeal}
+                    mealUri={item.strMealThumb}
+                  />
+                </View>
+              </TouchableWithoutFeedback>
+            ))}
+          </ScrollView>
+        )}
+      </LoadingWrapper>
     </SafeAreaView>
   );
 };

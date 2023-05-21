@@ -3,6 +3,8 @@ import Card from '../../components/CategoryCard';
 import styles from './CategoryList.style';
 import useFetch from '../../hooks/useFetch';
 
+import LoadingWrapper from '../../components/LoadingWrapper';
+
 const Categories = ({navigation}) => {
   const [isLoading, data, error] = useFetch(
     'GET',
@@ -11,24 +13,26 @@ const Categories = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {data.categories && (
-        <ScrollView>
-          {data.categories.map((item, index) => {
-            return (
-              <Card
-                title={item.strCategory}
-                key={item.idCategory}
-                onPress={() => {
-                  navigation.push('Meals', {
-                    title: item.strCategory,
-                  });
-                }}
-                img_url={item.strCategoryThumb}
-              />
-            );
-          })}
-        </ScrollView>
-      )}
+      <LoadingWrapper isLoading={isLoading} error={error}>
+        {data.categories && (
+          <ScrollView>
+            {data.categories.map((item, index) => {
+              return (
+                <Card
+                  title={item.strCategory}
+                  key={item.idCategory}
+                  onPress={() => {
+                    navigation.push('Meals', {
+                      title: item.strCategory,
+                    });
+                  }}
+                  img_url={item.strCategoryThumb}
+                />
+              );
+            })}
+          </ScrollView>
+        )}
+      </LoadingWrapper>
     </SafeAreaView>
   );
 };

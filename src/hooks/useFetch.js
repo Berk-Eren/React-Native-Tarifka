@@ -6,7 +6,10 @@ function useFetch(method, url) {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  console.log('Hello');
+
   useEffect(() => {
+    console.log('Hello1');
     axios({
       method,
       url,
