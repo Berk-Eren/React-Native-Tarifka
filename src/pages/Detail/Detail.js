@@ -17,6 +17,7 @@ import useFetch from '../../hooks/useFetch';
 
 const Details = ({route}) => {
   const [refreshCounter, setRefreshCounter] = useState(0);
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     const [isLoading, data, error] = useFetch(
@@ -34,9 +35,7 @@ const Details = ({route}) => {
       <LoadingWrapper isLoading={isLoading} error={error}>
         {data.meals && (
           <ScrollView
-            refreshControl={
-              <RefreshControl refreshing={false} onRefresh={resendRequest} />
-            }>
+            refreshControl={<RefreshControl onRefresh={resendRequest} />}>
             <Image
               style={styles.image}
               source={{
